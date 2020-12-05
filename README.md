@@ -2,13 +2,13 @@
 version: 5.0 - Build 28
 
 INSTALL:
-$ cd  ${HOME}
-$ curl -L https://bit.ly/3qctuvQ -o smalltarbkp
-$ chmod +x smalltarbkp
-$ alias smalltarbkp='${HOME}/smalltarbkp'
-$ ource ~/.bashrc
-$ smalltarbkp --setup
-
+$ cd  ${HOME}<br>
+$ curl -L https://bit.ly/3qctuvQ -o smalltarbkp<br>
+$ chmod +x smalltarbkp<br>
+$ alias smalltarbkp='${HOME}/smalltarbkp'<br>
+$ ource ~/.bashrc<br>
+$ smalltarbkp --setup<br>
+<br>
 ###########################################################################################
 
 ✔ MEGA.nz TESTED (VERSION: 1.4.0.5)
