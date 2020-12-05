@@ -36,3 +36,9 @@ version: 5.0 - Build 28
 ###########################################################################################
 
 ![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot001.png?raw=true)
+![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot002.png?raw=true)
+![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot003.png?raw=true)
+![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot004.png?raw=true)
+![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot005.png?raw=true)
+![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot006.png?raw=true)
+![alt text](https://github.com/gcclinux/smalltarbkp/blob/main/screenshots/screenshot007.png?raw=true)
