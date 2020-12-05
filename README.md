@@ -1,15 +1,23 @@
 # smalltarbkp
 version: 5.0 - Build 28
 
+INSTALL:
+$ cd  ${HOME}
+$ curl -L https://bit.ly/3qctuvQ -o smalltarbkp
+$ chmod +x smalltarbkp
+$ alias smalltarbkp='${HOME}/smalltarbkp'
+$ ource ~/.bashrc
+$ smalltarbkp --setup
+
 ###########################################################################################
 
-✔ MEGA.nz INSTALLED (VERSION: 1.4.0.5)
-✔ GAWK INSTALLED (VERSION: 5.0.1)
-✔ OPENSSL INSTALLED (VERSION: 1.1.1f)
-✔ MYSQLDUMP INSTALLED (VERSION: 10.17)
-✔ PG_DUMP INSTALLED (VERSION: 12.5)
-✔ CADAVER INSTALLED (VERSION: 0.23.3)
-✔ CURL INSTALLED (VERSION: 7.68.0)
+✔ MEGA.nz TESTED (VERSION: 1.4.0.5)
+✔ GAWK TESTED (VERSION: 5.0.1)
+✔ OPENSSL TESTED (VERSION: 1.1.1f)
+✔ MYSQLDUMP TESTED (VERSION: 10.17)
+✔ PG_DUMP TESTED (VERSION: 12.5)
+✔ CADAVER TESTED (VERSION: 0.23.3)
+✔ CURL TESTED (VERSION: 7.68.0)
 
 ✔ ADDITIONAL COMMANDS USED ✔
 ✔ /usr/bin/ls
