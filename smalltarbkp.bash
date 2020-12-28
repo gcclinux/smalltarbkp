@@ -26,7 +26,7 @@ MISSING="\033[1;31m\xE2\x9C\x96\033[0m"
 NEED="\033[1;31m\xE2\x9E\xA1\033[0m"
 RULLER="\e[33m###########################################################################################\033[0m"
 
-VERSION="5.0 - Build 28"					      # Script version and build number
+VERSION="5.0 - Build 32"					      # Script version and build number
 TMP=""                                                                # Temprary store setup varible
 START=""                                                              # Boolean START = true/false
 SETCOUNT=""                                                           # Boolean SETCOUNT = true/false
@@ -362,10 +362,13 @@ ls
 exit
 EOA
 }
-test | grep "succeeded" >/dev/null 2>&1
+test | egrep '(empty|succeeded)' >/tmp/$$.$$ 2>&1
 RESULT=$?
 if [ ${RESULT} == "0" ]; then
         echo -e "${GOOD} \e[33mNEXTCLOUD connection was Successfully\033[0m"
+	if grep "empty" /tmp/$$.$$; then
+		nextcloud_create_main_folder;
+	fi
 else
         echo ""
         echo -e "${MISSING} NEXTCLOUD failed to establish connection!"
@@ -2189,7 +2192,7 @@ function purge_mega() {
 
 function purge_retention () {
 #########################################################################
-# CLEAN UP LOCAL EXPIRED FILES
+# CLEAN UP ALL CONFIGURED EXPIRED FILES
 #########################################################################
 
 for BKPDIRS in `find ${LOCAL_TARGET}/${TARGET}/ -maxdepth 1 -type d -mtime +$RETENTION`
@@ -2198,6 +2201,10 @@ do
        		/usr/bin/rm -rf $BKPDIRS
 	fi
 done
+
+# TODO NEXTCLOUD
+
+# TODO MEGA
 
 #########################################################################
 # CLEAN UP MEGA EXPIRED FILES
