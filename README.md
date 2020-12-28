@@ -1,5 +1,5 @@
 # smalltarbkp
-version: 5.0 - Build 28
+version: 5.0 - Build 32
 
 INSTALL:
 $ cd  ${HOME}<br>
@@ -39,7 +39,7 @@ $ smalltarbkp --setup<br>
 ✔ /usr/bin/printf
 
 
-✔ SMALLTARBKP CONFIGURED { VERSION: 5.0 - Build 28 }
+✔ SMALLTARBKP CONFIGURED { VERSION: 5.0 - Build 32 }
 
 ###########################################################################################
 
