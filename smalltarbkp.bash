@@ -26,7 +26,7 @@ MISSING="\033[1;31m\xE2\x9C\x96\033[0m"
 NEED="\033[1;31m\xE2\x9E\xA1\033[0m"
 RULLER="\e[33m###########################################################################################\033[0m"
 
-VERSION="5.0 - Build 32"					      # Script version and build number
+VERSION="5.0 - Build 40"					      # Script version and build number
 TMP=""                                                                # Temprary store setup varible
 START=""                                                              # Boolean START = true/false
 SETCOUNT=""                                                           # Boolean SETCOUNT = true/false
@@ -843,7 +843,8 @@ function upgrade () {
                 exit 1
         else
                 CURL="true";
-                cp ${NAME} ${NAME}-${VERSION}
+		echo "NOTE: ${DATE} - Create copy of current script ..." | tee -a ${ERROR}
+                cp ${NAME} ${NAME}-`echo ${VERSION} | tr " " "_"`
         fi
 
         #### DOWNLOAD THE LATEST VERSION OF THE SCRIPT
@@ -881,6 +882,9 @@ function upgrade () {
                 check | tee -a ${ERROR}
                 exit 1;
         fi
+
+	echo "NOTE: ${DATE} - Deleting temp files ..." | tee -a ${ERROR}
+	rm downloaded
         ########### UPGRADE END ###########
 }
 
@@ -2201,10 +2205,6 @@ do
        		/usr/bin/rm -rf $BKPDIRS
 	fi
 done
-
-# TODO NEXTCLOUD
-
-# TODO MEGA
 
 #########################################################################
 # CLEAN UP MEGA EXPIRED FILES
