@@ -15,6 +15,11 @@
 # @WARNING:	SCRIPT UPDATES WILL NOT PRESERVE ANY MODIFICATIONS    #
 #######################################################################
 
+## TODO - Check if all required software is installed before each backup  			- Build 42
+## TODO - Check if Local_target exist before each backup					- Build 43
+## TODO - When expiring images must only expire from it's own HOST rather that entire folder	- Build 44
+## TODO - Add archive FLAG - Means won't be deleted by the retention only manually		- Build 45
+
 CONFIG=${HOME}/.config/.smalltarbkp.cnf				     # Config file for v4.0 and above
 if [[ ! -f ${CONFIG} ]]; then
 	touch ${CONFIG};
@@ -26,7 +31,7 @@ MISSING="\033[1;31m\xE2\x9C\x96\033[0m"
 NEED="\033[1;31m\xE2\x9E\xA1\033[0m"
 RULLER="\e[33m###########################################################################################\033[0m"
 
-VERSION="5.0 - Build 40"					      # Script version and build number
+VERSION="5.0 - Build 41"					      # Script version and build number
 TMP=""                                                                # Temprary store setup varible
 START=""                                                              # Boolean START = true/false
 SETCOUNT=""                                                           # Boolean SETCOUNT = true/false
@@ -231,7 +236,7 @@ function banner () {
 function help () {
   	echo "version: $VERSION"
   	if [[ ${SETUP} == "FALSE" ]] || [[ -z ${SETUP} ]]; then
-  		if [[ ${1} != "-configure" ]]; then
+  		if [[ ${1} != "--setup" ]]; then
   		        check "false";
   		fi
   	fi
