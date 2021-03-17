@@ -3,7 +3,7 @@
 # @author:            		Ricardo Wagemaker (["java"] + "@" + "wagemaker.co.uk") 2017-2020
 # @name:			smalltarbkp
 # @created: 			Sun 6 Aug 08:17:41 BST 2017 - original v1.0
-# @updated: 			Tue  1 Dec 21:05:59 GMT 2020
+# @updated: 			Wed 17 Mar 11:00:41 GMT 2021
 # @tested OS:			Ubuntu 20.04 & Fedora 33 & Raspbian 10
 # @tested MYSQL: 		mysql Ver 14.14 Distrib 5.7.28 | mysql Ver 15.1 Distrib 10.3.22-MariaDB
 # @tested PostgreSQL:		psql 12.5-0ubuntu0.20.04.1
@@ -14,11 +14,6 @@
 # @WARNING:	ANY MODIFICATIONS IS AT YOUR OWN RISK                 #
 # @WARNING:	SCRIPT UPDATES WILL NOT PRESERVE ANY MODIFICATIONS    #
 #######################################################################
-
-## TODO - Check if all required software is installed before each backup  			- Build 42
-## TODO - Check if Local_target exist before each backup					- Build 43
-## TODO - When expiring images must only expire from it's own HOST rather that entire folder	- Build 44
-## TODO - Add archive FLAG - Means won't be deleted by the retention only manually		- Build 45
 
 CONFIG=${HOME}/.config/.smalltarbkp.cnf				     # Config file for v4.0 and above
 if [[ ! -f ${CONFIG} ]]; then
@@ -31,7 +26,7 @@ MISSING="\033[1;31m\xE2\x9C\x96\033[0m"
 NEED="\033[1;31m\xE2\x9E\xA1\033[0m"
 RULLER="\e[33m###########################################################################################\033[0m"
 
-VERSION="5.0 - Build 41"					      # Script version and build number
+VERSION="5.0 - Build 45"					      # Script version and build number
 TMP=""                                                                # Temprary store setup varible
 START=""                                                              # Boolean START = true/false
 SETCOUNT=""                                                           # Boolean SETCOUNT = true/false
@@ -236,7 +231,7 @@ function banner () {
 function help () {
   	echo "version: $VERSION"
   	if [[ ${SETUP} == "FALSE" ]] || [[ -z ${SETUP} ]]; then
-  		if [[ ${1} != "--setup" ]]; then
+  		if [[ ${1} != "-configure" ]]; then
   		        check "false";
   		fi
   	fi
@@ -339,10 +334,16 @@ function help-cloud (){
   }
 
 function test_mega (){
-          echo ""
+          echo -e "${NEED} Trying to connet to MEGA.nz"
           /usr/bin/mega-logout >/dev/null 2>&1 # Disconnect if connection already exist
-          /usr/bin/mega-login ${mega_user_email} ${mega_user_password} >/dev/null 2>&1
+          /usr/bin/mega-login ${MEGA_EMAIL} ${MEGA_PASSWORD} >/dev/null 2>&1
           /usr/bin/mega-session >/dev/null 2>&1
+          if [ ! $? = "0" ]; then
+                echo -e "${MISSING} ERROR LVI: ${DATE} Failed to connect to \033[1;31m\"MEGA.nz!\"\033[0m" | tee -a ${ERROR}
+                exit 1
+          else
+                echo -e "${GOOD} Successfully connected to \033[1;31m\"MEGA.nz!\"\033[0m" | tee -a ${ERROR}
+          fi
   }
 
 function netrc_tmp (){
@@ -1727,6 +1728,7 @@ function since_last_full () {
 }
 
 function mega_target () {
+	test_mega;
         /usr/bin/mega-cd / # Insure we are at root
         /usr/bin/mega-ls ${TARGET}/${DATE} >/dev/null 2>&1
         if [ ! $? = "0" ]; then
@@ -2569,4 +2571,10 @@ elif [[ ${1} == "--purge-manually" ]] && [[ ${2} == "-mega" ]]; then
 elif [[ ${1} == "--purge-maintanance" ]] && [[ -z ${2} ]]; then
 	clear;
 	purge_retention;
+fi
+
+### NOT PART OF THE SCRIPT
+WHO=`/usr/bin/whoami`
+if [[ ${WHO} == "root" ]];then
+	chown -R ricardo:ricardo ${DESDIR}
 fi
